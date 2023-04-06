@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using ProyectoRest.Modelos;
+namespace ProyectoRest
+{
+    public partial class UsuarioDbContext : DbContext
+    {
+        public UsuarioDbContext()
+        {
+        }
+
+        public UsuarioDbContext(DbContextOptions<UsuarioDbContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Ciudad> Ciudads { get; set; } = null!;
+        public virtual DbSet<Pais> Pais { get; set; } = null!;
+        public virtual DbSet<Provincia> Provincia { get; set; } = null!;
+        public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=NB101388;Initial Catalog=UsuarioDb;Persist Security Info=true;User id=sa;Password=Andreani;Trusted_Connection=True;");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Ciudad>(entity =>
+            {
+                entity.HasKey(e => e.IdCiudad);
+
+                entity.ToTable("Ciudad");
+
+                entity.Property(e => e.IdCiudad)
+                    .ValueGeneratedNever()
+                    .HasColumnName("idCiudad");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("descripcion");
+
+                entity.Property(e => e.IdProvincia).HasColumnName("idProvincia");
+
+                entity.HasOne(d => d.IdCiudadNavigation)
+                    .WithOne(p => p.Ciudad)
+                    .HasForeignKey<Ciudad>(d => d.IdCiudad)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ciudad_Provincia");
+            });
+
+            modelBuilder.Entity<Pais>(entity =>
+            {
+                entity.HasKey(e => e.IdPais);
+
+                entity.Property(e => e.IdPais).HasColumnName("idPais");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .HasColumnName("descripcion");
+            });
+
+            modelBuilder.Entity<Provincia>(entity =>
+            {
+                entity.HasKey(e => e.IdProvincia);
+
+                entity.Property(e => e.IdProvincia)
+                    .ValueGeneratedNever()
+                    .HasColumnName("idProvincia");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(10)
+                    .HasColumnName("descripcion")
+                    .IsFixedLength();
+
+                entity.Property(e => e.IdPais).HasColumnName("idPais");
+
+                entity.HasOne(d => d.IdPaisNavigation)
+                    .WithMany(p => p.Provincia)
+                    .HasForeignKey(d => d.IdPais)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Provincia_Pais");
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.HasKey(e => e.Nombre);
+
+                entity.ToTable("Usuario");
+
+                entity.Property(e => e.Nombre).HasColumnName("nombre");
+
+                entity.Property(e => e.Apellido).HasColumnName("apellido");
+
+                entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.IdUser).HasColumnName("idUser");
+
+                entity.Property(e => e.Telefono).HasColumnName("telefono");
+            });
+
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    }
+}
