@@ -12,9 +12,11 @@ public class CiudadService:ICiudadService
     context = dbcontext;
   }
 
-  public IEnumerable<Ciudad> Get()
+  public IEnumerable<CiudadDTO> Get()
   {
-    return context.Ciudades;
+    return context.Ciudades.Select(x=>new CiudadDTO{
+     idCiudad=x.IdCiudad, descripcion = x.Descripcion, idProvincia= x.IdProvincia
+    });
   }
   
   public async Task Save(Ciudad ciudad)
@@ -30,7 +32,7 @@ public class CiudadService:ICiudadService
   // }
 
 
-  public async Task Update(Guid id, Ciudad ciudad)
+  public async Task Update(int id, Ciudad ciudad)
   {
     var ciudadActual = context.Ciudades.Find(id);
 
@@ -43,7 +45,7 @@ public class CiudadService:ICiudadService
     }
   }
 
-  public async Task Delete(Guid id)
+  public async Task Delete(int id)
   {
     var ciudadActual = context.Ciudades.Find(id);
 
@@ -59,10 +61,10 @@ public class CiudadService:ICiudadService
 
 public interface ICiudadService
 {
-  IEnumerable<Ciudad> Get();
+  IEnumerable<CiudadDTO> Get();
   Task Save(Ciudad ciudad);
   //void Save(Ciudad ciudad);
-  Task Update(Guid id, Ciudad ciudad);
-  Task Delete(Guid id);
+  Task Update(int id, Ciudad ciudad);
+  Task Delete(int id);
   
 }

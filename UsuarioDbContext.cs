@@ -48,10 +48,9 @@ namespace ProyectoRest
 
                 //entity.Property(e => e.IdProvincia).HasColumnName("idProvincia");
 
-                entity.HasOne(d => d.IdCiudadNavigation)
+                entity.HasOne(d => d.IdProvinciaNavigation)
                     .WithOne(p => p.Ciudad)
-                    .HasForeignKey<Ciudad>(d => d.IdCiudad)
-                    
+                    .HasForeignKey<Ciudad>(d => d.IdProvincia)
                     .HasConstraintName("FK_Ciudad_Provincia");
             });
 

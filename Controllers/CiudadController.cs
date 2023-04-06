@@ -28,13 +28,13 @@ public class CiudadController : ControllerBase
 
   public IActionResult Post([FromBody] CiudadDTO ciudadDTO)
   {   
-      var ciudad = new Ciudad(){IdCiudad=ciudadDTO.idCiudad,Descripcion=ciudadDTO.descripcion,IdProvincia=ciudadDTO.idProvincia};
+      var ciudad = new Ciudad(){ Descripcion = ciudadDTO.descripcion,IdProvincia = ciudadDTO.idProvincia};
       ciudadService.Save(ciudad);
       return Ok();
   }
 
   [HttpPut ("{id}")]
-  public IActionResult Put(Guid id,[FromBody] Ciudad ciudad)
+  public IActionResult Put(int id,[FromBody] Ciudad ciudad)
   {
     ciudadService.Update(id,ciudad);
     return Ok();
@@ -43,7 +43,7 @@ public class CiudadController : ControllerBase
 
   [HttpDelete("{id}")]
 
-  public IActionResult Delete(Guid id)
+  public IActionResult Delete(int id)
   {
     ciudadService.Delete(id);
     return Ok();

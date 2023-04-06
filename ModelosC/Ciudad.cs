@@ -14,7 +14,7 @@ namespace ProyectoRest.ModelosC
         public string Descripcion { get; set; } = null!;
         public int IdProvincia { get; set; }
 
-        public virtual Provincia IdCiudadNavigation { get; set; } = null!;
+        public virtual Provincia IdProvinciaNavigation { get; set; } = null!;
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }
