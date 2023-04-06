@@ -14,8 +14,10 @@ public class UsuarioService:IUsuarioService
 
   public IEnumerable<UsuarioDTO> Get()
   {
-    return context.Usuarioss.Select(x=>new UsuarioDTO{
-      nombre= x.Nombre,apellido=x.Apellido,telefono=x.Telefono,email=x.Email
+    return context.Usuarios.Select(x=>new UsuarioDTO{
+
+      idUser=x.IdUser, nombre= x.Nombre,apellido=x.Apellido,telefono=x.Telefono,email=x.Email,IdPais=x.IdPais,
+      IdProvincia=x.IdProvincia,IdCiudad=x.IdCiudad
     });
   }
   
@@ -27,11 +29,11 @@ public class UsuarioService:IUsuarioService
 
   public async Task Update(int id, Usuario usuario)
   {
-    var usuarioActual = context.Usuarioss.Find(id);
+    var usuarioActual = context.Usuarios.Find(id);
 
     if(usuarioActual != null)
     {
-
+      
       usuarioActual.Nombre= usuario.Nombre;
       usuarioActual.Apellido= usuario.Apellido;
       usuarioActual.Email=usuario.Email;
@@ -46,7 +48,7 @@ public class UsuarioService:IUsuarioService
 
   public async Task Delete(int id)
   {
-    var usuarioActual = context.Usuarioss.Find(id);
+    var usuarioActual = context.Usuarios.Find(id);
 
     if(usuarioActual != null)
     {

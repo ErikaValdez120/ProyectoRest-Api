@@ -33,8 +33,16 @@ public class UsuarioController : ControllerBase
 
   [HttpPost]
 
-  public IActionResult Post([FromBody] Usuario usuario)
+  public IActionResult Post([FromBody] UsuarioDTO usuarioDTO)
   {
+      var usuario = new Usuario(){
+      Nombre= usuarioDTO.nombre,
+      Apellido=usuarioDTO.apellido,
+      Telefono=usuarioDTO.telefono,
+      Email=usuarioDTO.email,
+      IdPais=usuarioDTO.IdPais,
+      IdProvincia=usuarioDTO.IdProvincia,
+      IdCiudad=usuarioDTO.IdCiudad};
       usuarioService.Save(usuario);
       return Ok();
   }

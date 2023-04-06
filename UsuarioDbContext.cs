@@ -20,7 +20,7 @@ namespace ProyectoRest
         public virtual DbSet<Ciudad> Ciudades { get; set; } = null!;
         public virtual DbSet<Pais> Paises { get; set; } = null!;
         public virtual DbSet<Provincia> Provincias { get; set; } = null!;
-        public virtual DbSet<Usuario> Usuarioss { get; set; } = null!;
+        public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -96,7 +96,7 @@ namespace ProyectoRest
                 entity.HasKey(e => e.IdUser);
 
                 entity.Property(e => e.IdUser)
-                    .ValueGeneratedNever()
+                    
                     .HasColumnName("idUser");
 
                 entity.Property(e => e.Apellido)
