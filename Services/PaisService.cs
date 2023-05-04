@@ -15,8 +15,8 @@ public class PaisService:IPaisService
   public IEnumerable<PaisDTO> Get()
   {
     return context.Paises.Select(x=>new PaisDTO{
-      idPaisDTO=x.IdPais,
-      descripcion= x.Descripcion
+      idPais=x.IdPais,
+      nombre= x.Descripcion
     });
   }
   

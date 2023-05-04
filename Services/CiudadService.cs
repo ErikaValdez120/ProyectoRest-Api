@@ -15,7 +15,7 @@ public class CiudadService:ICiudadService
   public IEnumerable<CiudadDTO> Get()
   {
     return context.Ciudades.Select(x=>new CiudadDTO{
-     idCiudad=x.IdCiudad, descripcion = x.Descripcion, idProvincia= x.IdProvincia
+     idCiudad=x.IdCiudad, nombre = x.Descripcion, idProvincia= x.IdProvincia
     });
   }
   

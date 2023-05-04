@@ -28,7 +28,7 @@ public class PaisController : ControllerBase
 
   public IActionResult Post([FromBody] PaisDTO paisDTO)
   {
-      var pais = new Pais(){Descripcion = paisDTO.descripcion};
+      var pais = new Pais(){Descripcion = paisDTO.nombre};
       paisService.Save(pais);
       return Ok();
   }

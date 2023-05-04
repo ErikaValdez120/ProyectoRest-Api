@@ -15,7 +15,7 @@ public class ProvinciaService:IProvinciaService
   public IEnumerable<ProvinciaDTO> Get()
   {
     return context.Provincias.Select(X=>new ProvinciaDTO{
-    idProvincia = X.IdProvincia,descripcion=X.Descripcion,idPais=X.IdPais
+    idProvincia = X.IdProvincia,nombre=X.Descripcion,idPais=X.IdPais
     });
   }
   

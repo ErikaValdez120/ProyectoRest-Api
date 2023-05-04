@@ -28,7 +28,7 @@ public class CiudadController : ControllerBase
 
   public IActionResult Post([FromBody] CiudadDTO ciudadDTO)
   {   
-      var ciudad = new Ciudad(){ Descripcion = ciudadDTO.descripcion,IdProvincia = ciudadDTO.idProvincia};
+      var ciudad = new Ciudad(){ Descripcion = ciudadDTO.nombre,IdProvincia = ciudadDTO.idProvincia};
       ciudadService.Save(ciudad);
       return Ok();
   }

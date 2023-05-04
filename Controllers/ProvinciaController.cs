@@ -28,7 +28,7 @@ public class ProvinciaController : ControllerBase
 
   public IActionResult Post([FromBody] ProvinciaDTO provinciaDTO)
   {
-      var provincia = new Provincia(){ Descripcion= provinciaDTO.descripcion,IdPais=provinciaDTO.idPais};
+      var provincia = new Provincia(){ Descripcion= provinciaDTO.nombre,IdPais=provinciaDTO.idPais};
      provinciaService.Save(provincia);
       return Ok();
   }

@@ -1,8 +1,8 @@
 public class PaisDTO 
 {
 
-  public int idPaisDTO {get;set;}
-  public string descripcion {get;set;} = null!;
+  public int idPais {get;set;}
+  public string nombre {get;set;} = null!;
 
 
 }
